@@ -22,9 +22,16 @@ const config: AdminKitConfig = {
     },
     {
       title: 'Финансы', items: [
-        { href: '/orders', label: 'Заказы', icon: 'wallet', badge: 3 },
+        { href: '/orders', label: 'Заказы', icon: 'wallet', badge: 0 },
       ]
     },
+    {
+      title: 'Интерфейс', items: [
+        {
+          href: '/banner', label: "Банер главной страницы", icon: 'menu',
+        }
+      ]
+    }
   ],
   theme: { mode: 'light', accent: '#3b5bfd', accent2: '#6d5efc' },
   layout: { search: true, user: true, themeToggle: true, notifications: true },
