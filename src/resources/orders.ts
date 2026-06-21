@@ -32,7 +32,7 @@ export const ordersResource = createResource<Order>({
   // схема окна просмотра
   infolist: () => [
     TextEntry.make('number').label('Номер'),
-    BadgeEntry.make('status').label('Статус').colors(COLORS).labels(LABELS),
+    BadgeEntry.make('status').label('Статус').colors(COLORS).labels(LABELS),      
     TextEntry.make('customer').label('Покупатель'),
     TextEntry.make('phone').label('Телефон'),
     TextEntry.make('address').label('Адрес доставки').full(),
