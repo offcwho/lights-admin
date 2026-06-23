@@ -40,7 +40,7 @@ const config: AdminKitConfig = {
     }
   ],
   theme: { mode: 'light', accent: '#3b5bfd', accent2: '#6d5efc' },
-  layout: { search: true, user: true, themeToggle: true, notifications: true },
+  layout: { search: false, user: true, themeToggle: true, notifications: false },
   auth,
   storage,
   demo: false,
