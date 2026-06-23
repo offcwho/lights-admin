@@ -19,7 +19,8 @@ const config: AdminKitConfig = {
     {
       title: 'Управление', items: [
         { href: '/users', label: 'Пользователи', icon: 'users' },
-        { href: '/reviews', label: 'Отзывы', icon: 'docs' }
+        { href: '/reviews', label: 'Отзывы', icon: 'docs' },
+        { href: '/support', label: 'Поддержка', icon: 'help'}
       ]
     },
     {
