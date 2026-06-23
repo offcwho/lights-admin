@@ -36,7 +36,7 @@ const config: AdminKitConfig = {
           label: 'Заказы',
           icon: 'wallet',
           badge: (api: any) => api.get('/orders').then((res: any) =>
-            res.total ?? res.items?.length ?? 0
+            res.items?.length ?? 0
           )
         },
         {
