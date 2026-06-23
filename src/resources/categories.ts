@@ -8,7 +8,7 @@ export interface Categories {
 
 export const categoriesResource = createResource<Categories>({
   name: 'categories',
-  label: 'Categories',
+  label: 'Категории',
   singular: 'Категорию',
   endpoint: '/categories',
   columns: () => [

@@ -1,5 +1,5 @@
 'use client';
-import { AdminKitProvider, AdminKitConfig } from 'rdy-admin';
+import { AdminKitProvider, AdminKitConfig, demoAuth } from 'rdy-admin';
 import 'rdy-admin/styles.css';
 import { auth } from '@/settings/auth';
 import { storage } from '@/settings/storage';
@@ -15,9 +15,15 @@ const config: AdminKitConfig = {
       ]
     },
     {
+      title: 'Управление', items: [
+        {href: '/users', label: 'Пользователи', icon: 'users'}
+      ]
+    },
+    {
       title: 'Каталог', items: [
         { href: '/products', label: 'Товары', icon: 'box' },
         { href: '/categories', label: 'Категории', icon: 'grid' },
+        { href: '/characteristics', label: 'Характеристики', icon: 'chart'}
       ]
     },
     {
