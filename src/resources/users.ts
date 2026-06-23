@@ -1,4 +1,4 @@
-import { createResource, TextColumn, BadgeColumn, TextInput, Textarea, Select, Container } from 'rdy-admin';
+import { createResource, TextColumn, BadgeColumn, TextInput, Textarea, Select, Container, FileUpload } from 'rdy-admin';
 
 export interface User {
   id: string;
@@ -15,6 +15,7 @@ export const usersResource = createResource<User>({
   name: 'Пользователи',
   label: 'Пользователи',
   singular: 'Пользователь',
+  allowCreate: false,
   endpoint: '/users',
   columns: () => [
     TextColumn.make('name').label('Название').searchable().sortable(),
@@ -28,6 +29,10 @@ export const usersResource = createResource<User>({
       .make('name')
       .label('Название')
       .required(),
+    FileUpload.make('avatarUrl')
+      .label('Аватар пользователя')
+      .image()
+      .maxSizeMB(10),
     Select
       .make('role')
       .label('Роль пользователя')

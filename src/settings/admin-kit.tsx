@@ -6,7 +6,9 @@ import { storage } from '@/settings/storage';
 
 const config: AdminKitConfig = {
   appName: 'Admin',
-  brand: 'Admin',
+  brand: 'Свет.Ру Админ',
+  logo: '',
+  avatarKey: 'avatarUrl',
   backendUrl: process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:9000/api',
   navigation: [
     {
@@ -16,19 +18,26 @@ const config: AdminKitConfig = {
     },
     {
       title: 'Управление', items: [
-        {href: '/users', label: 'Пользователи', icon: 'users'}
+        { href: '/users', label: 'Пользователи', icon: 'users' }
       ]
     },
     {
       title: 'Каталог', items: [
         { href: '/products', label: 'Товары', icon: 'box' },
         { href: '/categories', label: 'Категории', icon: 'grid' },
-        { href: '/characteristics', label: 'Характеристики', icon: 'chart'}
+        { href: '/characteristics', label: 'Характеристики', icon: 'chart' }
       ]
     },
     {
       title: 'Финансы', items: [
-        { href: '/orders', label: 'Заказы', icon: 'wallet', badge: 0 },
+        {
+          href: '/orders',
+          label: 'Заказы',
+          icon: 'wallet',
+          badge: (api: any) => api.get('/orders').then((res: any) =>
+            res.total ?? res.items?.length ?? 0
+          )
+        }
       ]
     },
     {

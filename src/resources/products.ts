@@ -1,4 +1,4 @@
-import { createResource, TextColumn, BadgeColumn, TextInput, Textarea, Select, NumberInput, Toggle, Repeater, FileUpload, Container } from 'rdy-admin';
+import { createResource, TextColumn, BadgeColumn, TextInput, Textarea, Select, NumberInput, Toggle, Repeater, FileUpload, Container, ImageColumn } from 'rdy-admin';
 import { CharacteristicsType } from './characteristics';
 
 export interface Product {
@@ -37,8 +37,9 @@ export const productsResource = createResource<Product>({
   singular: 'товар',
   endpoint: '/products',          // POST/PATCH/DELETE сюда при demo:false
   columns: () => [
-    TextColumn.make('name').label('Название').sortable().searchable().weight('bold'),
-    TextColumn.make('category').label('Категория').searchable()
+    TextColumn.make('name').label('Название').sortable().searchable().weight('bold').width(200),
+    ImageColumn.make('images').label('Картинки').maxVisible(2).width(300),
+    TextColumn.make('category').label('Категория').searchable().width(200)
       .formatStateUsing((v) => (v && typeof v === 'object') ? (v as any).name : (v ?? '—')),
     TextColumn.make('price').label('Цена').money('RUB').sortable(),
     BadgeColumn.make('isActive').label('Статус')
@@ -80,7 +81,7 @@ export const productsResource = createResource<Product>({
       .array()
       .lookupFrom('/characteristics', { value: 'id', label: 'name' }),
     TextColumn.make('spec.colorTemps')
-    .label('Цветовая температура')
+      .label('Цветовая температура')
       .array()
       .lookupFrom('/characteristics', { value: 'id', label: 'name' }),
     TextColumn.make('spec.powerW').label('Мощность'),
@@ -264,8 +265,13 @@ export const productsResource = createResource<Product>({
     NumberInput.make('stock').label('Количество на складе').required().min(0).placeholder('6'),
     // характеристики товара — повторяющиеся строки (на бэк уходит массив объектов)
 
-    FileUpload.make('images').label('Изображения товара')
-      .multiple().image().maxFiles(6).maxSizeMB(5).hint('Первое фото станет обложкой'),
+    FileUpload.make('images')
+      .label('Изображения товара')
+      .multiple()
+      .image()
+      .maxFiles(6)
+      .maxSizeMB(5)
+      .hint('Первое фото станет обложкой'),
 
     Toggle.make('isActive').label('Опубликован').default(true).hint('Включите если нужно отображение на сайте'),
   ],

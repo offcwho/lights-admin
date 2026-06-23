@@ -19,7 +19,10 @@ export const bannerResource = createResource<Banner>({
   endpoint: '/banners/all',
   columns: () => [
     TextColumn.make('title').label('Название').searchable().sortable(),
-    BadgeColumn.make('isActive').label('Статус').colors({ true: 'green', false: 'gray' }),
+    BadgeColumn.make('isActive')
+      .label('Статус')
+      .colors({ true: 'green', false: 'gray', })
+      .labels({ true: 'Активен', false: 'Черновик' }),
   ],
   form: () => [
     TextInput.make('title').label('Заголовок').required(),
