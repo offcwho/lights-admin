@@ -36,9 +36,6 @@ const config: AdminKitConfig = {
           href: '/orders',
           label: 'Заказы',
           icon: 'wallet',
-          badge: (api: any) => api.get('/orders').then((res: any) =>
-            res.items?.length ?? 0
-          )
         },
         {
           href: '/promo-codes',
