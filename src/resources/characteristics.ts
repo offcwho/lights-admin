@@ -19,6 +19,7 @@ export enum CharacteristicsType {
 }
 
 export const characteristicsResource = createResource<Characteristics>({
+  allowBulkDelete: true,
   name: 'characteristics',
   label: 'Характеристики',
   singular: 'Характеристика',

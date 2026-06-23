@@ -32,6 +32,7 @@ interface ProductSpec {
 }
 
 export const productsResource = createResource<Product>({
+  allowBulkDelete: true,
   name: 'продукты',
   label: 'Товары',
   singular: 'товар',

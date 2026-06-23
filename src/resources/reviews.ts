@@ -12,6 +12,7 @@ export interface Review {
 }
 
 export const reviewsResource = createResource<Review>({
+  allowBulkDelete: true,
   name: 'reviews',
   label: 'Отзывы',
   singular: 'Отзыв',

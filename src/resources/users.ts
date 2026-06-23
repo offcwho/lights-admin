@@ -12,6 +12,7 @@ enum Role {
 }
 
 export const usersResource = createResource<User>({
+  allowBulkDelete: true,
   name: 'Пользователи',
   label: 'Пользователи',
   singular: 'Пользователь',

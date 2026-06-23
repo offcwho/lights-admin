@@ -14,6 +14,7 @@ export interface PromoCodes {
 }
 
 export const promoCodesResource = createResource<PromoCodes>({
+  allowBulkDelete: true,
   name: 'promoCodes',
   label: 'Промокоды',
   singular: 'Промокод',

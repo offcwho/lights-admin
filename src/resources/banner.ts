@@ -13,6 +13,7 @@ export interface Banner {
 }
 
 export const bannerResource = createResource<Banner>({
+  allowBulkDelete: true,
   name: 'banner',
   label: 'Баннер',
   singular: 'Баннер',

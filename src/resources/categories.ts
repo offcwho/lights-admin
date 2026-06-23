@@ -7,6 +7,7 @@ export interface Categories {
 }
 
 export const categoriesResource = createResource<Categories>({
+  allowBulkDelete: true,
   name: 'categories',
   label: 'Категории',
   singular: 'Категорию',
