@@ -7,15 +7,15 @@ export interface Characteristics {
 }
 
 export enum CharacteristicsType {
-  shapes = 'Форма',
-  styles = 'Стиль',
-  lampType = 'Тип ламп',
-  mountingType = 'Тип крепления',
-  frameMaterial = 'Материал арматуры',
-  frameColor = 'Цвет арматуры',
-  shadeMaterials = 'Материал плафона',
-  shadeColors = 'Цвет плафона',
-  colorTemps = 'Цветовая температура',
+  shapes = 'shapes',
+  styles = 'styles',
+  lampType = 'lampType',
+  mountingType = 'mountingType',
+  frameMaterial = 'frameMaterial',
+  frameColor = 'frameColor',
+  shadeMaterials = 'shadeMaterials',
+  shadeColors = 'shadeColors',
+  colorTemps = 'colorTemps',
 }
 
 export const characteristicsResource = createResource<Characteristics>({
