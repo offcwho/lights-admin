@@ -2,13 +2,19 @@ import { createResource, TextColumn, BadgeColumn, TextInput, Textarea, TextEntry
 
 export interface OrderItem { name: string; qty: number; price: number }
 export interface Order {
-  id: string; number: string; customer: string; phone: string; address: string;
-  total: number; status: 'cancelled' | 'new' | 'shipped' | 'sent' | 'completed';
-  createdAt: string; items: OrderItem[];
+  id: string;
+  userId: string;
+  user?: { name: string; email: string };
+  items: OrderItem[];
+  total: number;
+  status: 'new' | 'shipped' | 'sent' | 'completed' | 'cancelled';
+  shippingAddress?: string;
+  phone?: string;
+  createdAt: string;
 }
 
-const COLORS = { new: 'gray', assembling: 'amber', shipped: 'green', delivered: 'green', cancelled: 'red' } as const;
-const LABELS = { new: 'Новый', assembling: 'Сборка', shipped: 'Отгружен', delivered: 'Доставлен', cancelled: 'Отменён' };
+const COLORS = { new: 'gray', paid: 'amber', shipped: 'green', completed: 'green', cancelled: 'red' } as const;
+const LABELS = { new: 'Новый', paid: 'Сборка', shipped: 'Отгружен', completed: 'Доставлен', cancelled: 'Отменён' };
 
 export const ordersResource = createResource<Order>({
   name: 'orders',
@@ -24,23 +30,26 @@ export const ordersResource = createResource<Order>({
     { value: 'completed', label: 'Доставлен' },
   ],
   columns: () => [
-    TextColumn.make('number').label('Заказ').sortable().searchable().weight('bold'),
-    TextColumn.make('customer').label('Покупатель').searchable(),
+    TextColumn.make('user.name').label('Покупатель').searchable()
+      .formatStateUsing((v) => (v && typeof v === 'object') ? (v as any).name ?? (v as any).email : (v ?? '—')),
+    TextColumn.make('phone').label('Телефон').formatStateUsing((v) => v ?? '—'),
     TextColumn.make('total').label('Сумма').money('RUB').sortable(),
     BadgeColumn.make('status').label('Статус').colors(COLORS).labels(LABELS),
+    TextColumn.make('createdAt').label('Дата')
+      .formatStateUsing((v) => v ? new Date(v).toLocaleDateString('ru-RU') : '—')
+      .sortable(),
   ],
   // схема окна просмотра
   infolist: () => [
-    TextEntry.make('number').label('Номер'),
-    BadgeEntry.make('status').label('Статус').colors(COLORS).labels(LABELS),      
-    TextEntry.make('customer').label('Покупатель'),
-    TextEntry.make('phone').label('Телефон'),
-    TextEntry.make('address').label('Адрес доставки').full(),
+    BadgeEntry.make('status').label('Статус').colors(COLORS).labels(LABELS),
+    TextEntry.make('user').label('Покупатель')
+      .formatStateUsing((v) => (v && typeof v === 'object') ? (v as any).name ?? (v as any).email : (v ?? '—')),
+    TextEntry.make('phone').label('Телефон').formatStateUsing((v) => v ?? '—'),
+    TextEntry.make('shippingAddress').label('Адрес доставки').full().formatStateUsing((v) => v ?? '—'),
     MoneyEntry.make('total').label('Сумма').currency('RUB'),
     DateEntry.make('createdAt').label('Создан'),
     TextEntry.make('items').label('Состав заказа').full()
       .formatStateUsing((items: OrderItem[]) =>
         (items ?? []).map((i) => `${i.name} ×${i.qty}`).join(', ') || '—'),
-    
   ],
 });

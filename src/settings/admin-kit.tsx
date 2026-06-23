@@ -18,7 +18,8 @@ const config: AdminKitConfig = {
     },
     {
       title: 'Управление', items: [
-        { href: '/users', label: 'Пользователи', icon: 'users' }
+        { href: '/users', label: 'Пользователи', icon: 'users' },
+        { href: '/reviews', label: 'Отзывы', icon: 'docs' }
       ]
     },
     {
@@ -37,6 +38,11 @@ const config: AdminKitConfig = {
           badge: (api: any) => api.get('/orders').then((res: any) =>
             res.total ?? res.items?.length ?? 0
           )
+        },
+        {
+          href: '/promo-codes',
+          label: 'Промокоды',
+          icon: 'dots'
         }
       ]
     },
